@@ -1,0 +1,16 @@
+- hosts: database 
+  pre_tasks:
+    - name: Lecture du fichier de variable (vars.yml)
+      include_vars: vars.yml
+  roles:
+    - mysql
+
+- hosts: web
+  pre_tasks:
+    - name: Lecture du fichier de variable (vars.yml)
+      include_vars: vars.yml
+  roles:
+    - apache2
+    - php
+    - wordpress
+

@@ -1,0 +1,11 @@
+---
+# Tasks file for Apache2
+
+- name: Installation d'Apache2
+  become: yes
+  apt: name=apache2 update_cache=yes state=latest
+
+
+- name: Activation de mod_rewrite
+  become: yes
+  apache2_module: name=rewrite state=present
