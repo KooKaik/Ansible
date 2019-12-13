@@ -40,7 +40,7 @@ On peut simplement modifier ces valeurs par celle que l'on souhaite.
 
 ### Lancement du playbook
 Pour maintenant lancer notre configuration, il suffit juste de taper la commande suivante:
-`ansible-playbook playbook.yml -i inventory -u UtilisateurSSH -K`
+`ansible-playbook playbook.yml -i inventory.ini -u UtilisateurSSH -K`
 
 `-i inventory` : définit notre fichier inventory.ini où sont stockés les adresses IP de nos serveurs.
 `-u UtilisateurSSH` : définit l'utilisateur SSH qui est utilisé sur par nos serveurs. (**A Modifier**)
