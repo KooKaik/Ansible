@@ -1,21 +1,15 @@
 ---
-# Tasks file for MYSQL
 
 - name: Installation de MYSQL
-  become: yes
-  apt: name={{item}} state=present
-  with_items:
-    - mysql-server
-    - libapache2-mod-php
-    - python-mysqldb
+  apt:
+    name: ['python-mysqldb', 'mysql-server', 'libapache2-mod-php'] 
+    state: present
     
 - name: Création d'une Base de Données MYSQL pour WordPress
   mysql_db: name={{ wp_mysql_db }} state=present
-  become: yes
 
 - name: Création d'un utilisateur MYSQL pour WordPress
   mysql_user: 
     name={{ wp_mysql_user }} 
     password={{ wp_mysql_password }} 
     priv=*.*:ALL
-  become: yes 

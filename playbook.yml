@@ -1,16 +1,25 @@
-- hosts: database 
-  pre_tasks:
-    - name: Lecture du fichier de variable (vars.yml)
-      include_vars: vars.yml
-  roles:
-    - mysql
+---
 
-- hosts: web
+- name: Installation MySQL
+  hosts: database
+  remote_user: admuser
+  become: true
   pre_tasks:
-    - name: Lecture du fichier de variable (vars.yml)
-      include_vars: vars.yml
+    - name: Lecture du fichier de variable
+      include_vars: ./group_vars/db.yml
   roles:
-    - apache2
-    - php
-    - wordpress
+  - mysql
 
+- name: Installation Serveur WEB
+  hosts: web
+  remote_user: admuser
+  become: true
+  roles:
+  - web-php-ftp
+
+- name: Installation WordPress
+  hosts: web
+  remote_user: admuser
+  become: true
+  roles:
+  - wordpress

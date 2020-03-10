@@ -1,0 +1,17 @@
+---
+
+- name: Installation d'Apache2
+  apt: 
+    name: apache2 
+    update_cache: yes 
+    state: latest
+
+- name: Activation de mod_rewrite
+  apache2_module: 
+    name: rewrite 
+    state: present
+
+- name: Installation de PHP + Dépendances
+  apt: 
+    name: ['php', 'php-mysql', 'php-common','php-mysql', 'php-tidy', 'php-xml', 'php-xmlrpc', 'php-mbstring', 'php-memcached', 'php-curl', 'php-zip']
+    state: present

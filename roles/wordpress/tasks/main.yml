@@ -1,5 +1,4 @@
 ---
-# Tasks file for WordPress
 
 - name: Téléchargement de WordPress
   get_url: 
@@ -9,29 +8,22 @@
 
 - name: Extraction de WordPress
   unarchive: src=/tmp/wordpress.tar.gz dest=/var/www/ copy=no
-  become: yes
 
 - name: Import VirtualHost (wordpress.conf)
-  become: yes
   copy:
-    src: files/wordpress.conf
+    src: ./template/wordpress.conf
     dest: /etc/apache2/sites-available/wordpress.conf
     mode: 0640
 
 - name: Activer VirtualHost (wordpress.conf)
-  become: yes
   command: a2ensite wordpress.conf
 
 - name: Desactiver 000-default
-  become: yes
   command: a2dissite 000-default.conf
   notify:
     - restart apache
 
 - name: Import configuration WordPress (wp-config.php)
-  become: yes
   template: 
-    src: wp-config.php
+    src: ./template/wp-config.php
     dest: /var/www/wordpress
-
-
